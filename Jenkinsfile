@@ -11,23 +11,7 @@ node('maven') {
     sh "java --version"
 
 
-    stage('Checkout') {
-        echo "${PULL_REQUEST_FROM_HASH}"
-        echo "${PULL_REQUEST_TO_BRANCH}"
-        try {
-            step([$class: 'WsCleanup'])
-            checkout scm
-            [$class: 'GitSCM', branches: [[name: "$PULL_REQUEST_FROM_HASH"]], doGenerateSubmoduleConfigurations: false, extensions:
-                    [[
-                             $class: 'PreBuildMerge', options: [fastForwardMode: 'FF', mergeRemote: 'origin', mergeStrategy: 'default', mergeTarget: "$PULL_REQUEST_TO_BRANCH"]
-                     ]],
-             submoduleCfg: [], userRemoteConfigs:[[credentialsId: 'JenkinsAdmin', url: "https://github.com/Manunagraj/demohsbcapp.git"]]
-            ]
-        } catch (Exception error) {
-            notifyStash("FAILED")
-            throw error
-        }
-    }
+ 
 
     stage('Build') {
         def v = version()
@@ -38,7 +22,7 @@ node('maven') {
             echo "Building version ${v}"
         }
 
-        echo "Building branch $PULL_REQUEST_TO_BRANCH"
+        echo "Building branch $demohsbcapp"
 
         try {
                 sh """
