@@ -10,7 +10,23 @@ node('maven') {
     sh "alternatives --set javac \$(alternatives --display javac | grep java-11 | awk '/family.*x86_64/ { print \$1; }')"
     sh "java --version"
 
-
+stage('Checkout') {
+        echo "${PULL_REQUEST_FROM_HASH}"
+        echo "${PULL_REQUEST_TO_BRANCH}"
+        try {
+            step([$class: 'WsCleanup'])
+            checkout scm
+            [$class: 'GitSCM', branches: [[name: "$PULL_REQUEST_FROM_HASH"]], doGenerateSubmoduleConfigurations: false, extensions:
+                    [[
+                             $class: 'PreBuildMerge', options: [fastForwardMode: 'FF', mergeRemote: 'origin', mergeStrategy: 'default', mergeTarget: "$PULL_REQUEST_TO_BRANCH"]
+                     ]],
+             submoduleCfg: [], userRemoteConfigs:[[credentialsId: 'JenkinsAdmin', url: "https://github.com/Manunagraj/demohsbcapp.git"]]
+            ]
+        } catch (Exception error) {
+            notifyStash("FAILED")
+            throw error
+        }
+    }
  
 
     stage('Build') {
