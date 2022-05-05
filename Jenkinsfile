@@ -18,26 +18,11 @@ stage('Checkout') {
     }
  
 
-    stage('Build') {
-        def v = version()
-        def commitAuthor = commitAuthor()
-        def commitMessage = commitMessage()
-
-        if (v) {
-            echo "Building version ${v}"
-        }
-
-        echo "Building branch $feature/jenkins"
-
-        try {
-                sh """
-                mvn -B -s clean package
-                """
-                notifyStash("SUCCESS")
-        } catch (Exception error) {
-            notifyStash("FAILED")
-            throw error
-        }
+     stage('Maven Build') {
+      steps {
+        echo 'Build jar file'
+        sh 'mvn clean install -DskipTests=true'
+      }
     }
 }
 
