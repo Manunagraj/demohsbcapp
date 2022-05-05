@@ -5,10 +5,6 @@ node('maven') {
     // default Java version
     sh "java -version"
 
-    // enable Java 11
-    sh "alternatives --set java \$(alternatives --display java | grep java-11 | awk '/family.*x86_64/ { print \$1; }')"
-    sh "alternatives --set javac \$(alternatives --display javac | grep java-11 | awk '/family.*x86_64/ { print \$1; }')"
-    sh "java --version"
 
 stage('Checkout') {
         echo "${PULL_REQUEST_FROM_HASH}"
