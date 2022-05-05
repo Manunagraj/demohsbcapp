@@ -27,7 +27,7 @@ stage('Checkout') {
             echo "Building version ${v}"
         }
 
-        echo "Building branch $demohsbcapp"
+        echo "Building branch $feature/jenkins"
 
         try {
                 sh """
