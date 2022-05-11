@@ -19,10 +19,9 @@ stage('Checkout') {
  
 
      stage('Maven Build') {
-      
-        echo 'Build jar file'
-        sh 'mvn package'
-      
+      withMaven(maven: 'mvn') {
+            sh "mvn clean package"
+        }
     }
 }
 
