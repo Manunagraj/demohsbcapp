@@ -21,7 +21,7 @@ stage('Checkout') {
      stage('Maven Build') {
       steps {
         echo 'Build jar file'
-        sh 'mvn clean install -DskipTests=true'
+        sh 'mvn package'
       }
     }
 }
