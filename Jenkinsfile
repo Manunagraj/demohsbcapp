@@ -21,7 +21,7 @@ stage('Checkout') {
      stage('Maven Build') {
       steps {
         echo 'Build jar file'
-        sh 'mvn clean package'
+        sh 'mvn spring-boot:run'
       }
     }
 }
