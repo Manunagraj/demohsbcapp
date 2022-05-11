@@ -19,10 +19,10 @@ stage('Checkout') {
  
 
      stage('Maven Build') {
-      steps {
+      
         echo 'Build jar file'
         sh 'mvn spring-boot:run'
-      }
+      
     }
 }
 
