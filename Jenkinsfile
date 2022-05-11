@@ -4,7 +4,7 @@ node('maven') {
 
     // default Java version
     sh "java -version"
-    sh "mvn -version"
+    
 
 
 stage('Checkout') {
