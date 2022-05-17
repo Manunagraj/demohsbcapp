@@ -27,7 +27,7 @@ node('maven') {
      
       stage("Docker build"){
 
-        sh 'docker version'
+        //sh 'docker version'
         sh 'docker build -t demohsbcapp .'
         sh 'docker image list'
         sh 'docker tag demohsbcapp weirdoo/demohsbcapp:v1'
