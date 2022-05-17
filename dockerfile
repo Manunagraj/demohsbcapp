@@ -1,4 +1,4 @@
 FROM openjdk:8
 EXPOSE 9000
-ADD target/spring-boot-ci-cd.jar spring-boot-ci-cd.jar
-ENTRYPOINT ["java", "-jar", "/spring-boot-ci-cd.jar"]
+ADD target/demohsbcapp-0.0.1-SNAPSHOT.jar demohsbcapp-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java", "-jar", "/demohsbcapp-0.0.1-SNAPSHOT.jar"]
